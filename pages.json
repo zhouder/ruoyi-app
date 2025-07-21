@@ -90,7 +90,7 @@
         "pagePath": "pages/sj40/index",
         "iconPath": "static/images/tabbar/work.png",
         "selectedIconPath": "static/images/tabbar/work_.png",
-        "text": "sj40信息管理"
+        "text": "SJ40信息管理"
       },{
         "pagePath": "pages/work/index",
         "iconPath": "static/images/tabbar/work.png",
