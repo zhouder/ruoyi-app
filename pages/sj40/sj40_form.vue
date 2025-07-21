@@ -25,6 +25,7 @@
 						<uni-easyinput type="text" v-model="form.bh" placeholder="请输入编号"></uni-easyinput>
 					</uni-forms-item>
 					
+					
 				</view>
 			</view>
 			
@@ -54,6 +55,20 @@
 					</uni-forms-item>
 					<uni-forms-item label="相对湿度(%)" name="xdsd" class="form-item">
 						<uni-easyinput type="number" v-model="form.xdsd" placeholder="请输入相对湿度"></uni-easyinput>
+					</uni-forms-item>
+					<uni-forms-item label="施工员" name="sgy" class="form-item">
+						<uni-easyinput type="text" v-model="form.sgy" placeholder="请输入施工员"></uni-easyinput>
+					</uni-forms-item>
+					<uni-forms-item label="专业工程师" name="zygcs" class="form-item">
+						<uni-easyinput type="text" v-model="form.zygcs" placeholder="请输入专业工程师"></uni-easyinput>
+					</uni-forms-item>
+					<uni-forms-item label="创建时间" name="cjsj" class="form-item">
+						<!-- <uni-easyinput type="datetime" v-model="form.cjsj" placeholder="请输入创建时间"></uni-easyinput> -->
+						<uni-datetime-picker
+							type="date"
+							v-model="form.cjsj"
+							placeholder="请输入创建时间"
+						></uni-datetime-picker>
 					</uni-forms-item>
 				</view>
 			</view>
