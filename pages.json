@@ -71,6 +71,12 @@
       "navigationBarTitleText": "浏览文本"
     }
   },{
+    "path": "pages/sj40/sj40_form",
+    "style": {
+      "navigationBarTitleText": "焊缝施焊记录编辑"
+    }
+  },
+  {
 	"path": "pages/sj40/index",
 	"style": {
 	  "navigationBarTitleText": "SJ40信息管理"

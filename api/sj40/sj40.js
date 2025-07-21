@@ -8,3 +8,20 @@ export function listZbmain(query) {
     params: query
   })
 }
+
+// 查询主要焊缝施焊记录主表详细
+export function getZbmain(id) {
+  return request({
+    url: '/zbmain/zbmain/' + id,
+    method: 'get'
+  })
+}
+
+// 修改主要焊缝施焊记录主表
+export function updateZbmain(data) {
+  return request({
+    url: '/zbmain/zbmain',
+    method: 'put',
+    data: data
+  })
+}

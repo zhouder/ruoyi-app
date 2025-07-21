@@ -8,7 +8,7 @@
 
 		<view class="list-wrapper">
 			<!-- 数据卡片 -->
-			<view class="card" v-for="(item, index) in zbmainList" :key="index">
+			<view class="card" v-for="(item, index) in zbmainList" :key="index" @click="goToForm(item.id, item.sgdw)">
 				<view class="card-header">
 					<text class="card-title">记录 {{index + 1}}</text>
 					<!-- <text class="card-id">ID: {{item.bh || '--'}}</text> -->
@@ -77,8 +77,12 @@
 				},
 			}
 		},
-		onLoad() {
+		onShow(){
 			this.getList()
+		},
+		
+		onLoad() {
+			
 		},
 		methods: {
 			getList() {
@@ -92,6 +96,11 @@
 						icon: 'none'
 					})
 				});
+			},
+			goToForm(id, sgdw) {
+				uni.navigateTo({
+					url: '/pages/sj40/sj40_form?id=' + id + '&sgdw=' + sgdw
+				})
 			}
 		}
 	}
