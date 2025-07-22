@@ -1,19 +1,19 @@
 {
-  "id": "uni-transition",
-  "displayName": "uni-transition 过渡动画",
-  "version": "1.3.6",
-  "description": "元素的简单过渡动画",
+  "id": "uni-ui",
+  "displayName": "uni-ui",
+  "version": "1.5.9",
+  "description": "uni-ui 是基于uni-app的、全端兼容的、高性能UI框架",
   "keywords": [
     "uni-ui",
     "uniui",
-    "动画",
-    "过渡",
-    "过渡动画"
+    "UI组件库",
+    "ui框架",
+    "ui库"
 ],
   "repository": "https://github.com/dcloudio/uni-ui",
   "engines": {
-    "HBuilderX": "",
-    "uni-app": "^4.12",
+    "HBuilderX": "^3.2.10",
+    "uni-app": "^4.06",
     "uni-app-x": ""
   },
   "directories": {
@@ -44,7 +44,49 @@
   },
   "uni_modules": {
     "dependencies": [
-      "uni-scss"
+      "uni-badge",
+      "uni-calendar",
+      "uni-card",
+      "uni-collapse",
+      "uni-combox",
+      "uni-countdown",
+      "uni-data-checkbox",
+      "uni-data-picker",
+      "uni-data-select",
+      "uni-dateformat",
+      "uni-datetime-picker",
+      "uni-drawer",
+      "uni-easyinput",
+      "uni-fab",
+      "uni-fav",
+      "uni-file-picker",
+      "uni-forms",
+      "uni-goods-nav",
+      "uni-grid",
+      "uni-group",
+      "uni-icons",
+      "uni-indexed-list",
+      "uni-link",
+      "uni-list",
+      "uni-load-more",
+      "uni-nav-bar",
+      "uni-notice-bar",
+      "uni-number-box",
+      "uni-pagination",
+      "uni-popup",
+      "uni-rate",
+      "uni-row",
+      "uni-search-bar",
+      "uni-section",
+      "uni-segmented-control",
+      "uni-steps",
+      "uni-swipe-action",
+      "uni-swiper-dot",
+      "uni-table",
+      "uni-tag",
+      "uni-title",
+      "uni-tooltip",
+      "uni-transition"
     ],
     "encrypt": [],
     "platforms": {
@@ -71,21 +113,15 @@
             "harmony": "√"
           },
           "mp": {
-            "weixin": {
-            },
-            "alipay": {
-            },
-            "toutiao": {
-            },
-            "baidu": {
-            },
-            "kuaishou": {
-            },
-            "jd": {
-            },
-            "harmony": "-",
+            "weixin": "√",
+            "alipay": "√",
+            "toutiao": "√",
+            "baidu": "√",
+            "kuaishou": "√",
+            "jd": "√",
+            "harmony": "√",
             "qq": "√",
-            "lark": "-"
+            "lark": "√"
           },
           "quickapp": {
             "huawei": "√",

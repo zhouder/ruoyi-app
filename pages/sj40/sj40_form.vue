@@ -73,13 +73,13 @@
 
 		<view class="form-card table-card">
 			<text class="section-title">焊接明细记录</text>
-			<view class="table-container">
+			<view class="uni-container">
 				<uni-table border stripe emptyText="暂无数据" class="editable-table">
 					<uni-tr>
-						<uni-th width="50" align="center">
+						<uni-th	 width="50" align="center">
 							<checkbox :checked="allSelected" @click="toggleAllSelection" />
 						</uni-th>
-						<uni-th width="50" align="center">序号</uni-th>
+						<uni-th width="60" align="center">序号</uni-th>
 						<uni-th align="center">焊缝编号</uni-th>
 						<uni-th align="center">焊道序号</uni-th>
 						<uni-th align="center">预热温度(℃)</uni-th>
@@ -93,8 +93,7 @@
 					</uni-tr>
 					<uni-tr v-for="(detailItem, index) in sj40DetailList" :key="index">
 						<uni-td align="center">
-							<checkbox :value="index" :checked="selectedRows.includes(index)"
-								@click="toggleRowSelection(index)" />
+							<checkbox :checked="selectedRows.includes(index)" @click="toggleRowSelection(index)" />
 						</uni-td>
 						<uni-td align="center">{{index + 1}}</uni-td>
 						<uni-td>
@@ -355,6 +354,7 @@
 				} else {
 					this.selectedRows.push(index);
 				}
+				console.log('this row: ' + this.selectedRows.includes(index))
 			},
 
 			// 全选/取消全选
@@ -367,6 +367,7 @@
 					this.selectedRows = [...Array(this.sj40DetailList.length).keys()];
 				}
 				this.allSelected = !this.allSelected;
+				console.log('all: ' + this.allSelected)
 			},
 
 			// 删除选中行
@@ -488,51 +489,63 @@
 		overflow-x: auto;
 	}
 
+
+
 	.editable-table {
-		width: 100%;
-		min-width: 1200rpx;
-
-		.uni-table-th {
-			background-color: #f8f9fa;
-			font-weight: bold;
-			color: #2c3e50;
-		}
-
-		.table-input {
-			height: 70rpx;
-			padding: 0 10rpx;
-
-			:deep(.uni-easyinput__content) {
-				min-height: auto;
-				border: 1rpx solid #dcdfe6;
-				border-radius: 8rpx;
+			width: 100%;
+			min-width: 1200rpx;
+	
+			.uni-table-th {
+				background-color: #f8f9fa;
+				font-weight: bold;
+				color: #2c3e50;
 			}
-		}
-
-		.table-datepicker {
-			:deep(.uni-date-editor) {
+	
+			// /* 添加复选框可见样式 */
+			// .checkbox {
+			// 	display: block;
+			// 	margin: 0 auto;
+			// 	width: 36rpx;
+			// 	height: 36rpx;
+			// 	opacity: 1;
+			// 	//appearance: checkbox; /* 标准属性 */
+			// }
+			
+			
+	
+			.table-input {
 				height: 70rpx;
-				border: 1rpx solid #dcdfe6;
-				border-radius: 8rpx;
+				padding: 0 10rpx;
+	
+				:deep(.uni-easyinput__content) {
+					min-height: auto;
+					border: 1rpx solid #dcdfe6;
+					border-radius: 8rpx;
+				}
+			}
+	
+			.table-datepicker {
+				:deep(.uni-date-editor) {
+					height: 70rpx;
+					border: 1rpx solid #dcdfe6;
+					border-radius: 8rpx;
+				}
+			}
+	
+			/* 调整序号列宽度 */
+			.uni-table-th,
+			.uni-table-td {
+				&:nth-child(1) {
+					width: 80rpx;
+					min-width: 80rpx;
+				}
+				&:nth-child(2) {
+					width: 60rpx;
+					min-width: 60rpx;
+				}
 			}
 		}
 
-		/* 复选框样式 */
-		checkbox {
-			transform: scale(0.8);
-		}
-
-		/* 序号列宽度 */
-		.uni-table-th,
-		.uni-table-td {
-
-			&:nth-child(1),
-			&:nth-child(2) {
-				width: 60rpx;
-				min-width: 60rpx;
-			}
-		}
-	}
 
 	/* 表格操作按钮 */
 	.table-actions {
@@ -575,11 +588,22 @@
 			}
 		}
 
-		.uni-icons {
-			margin-right: 10rpx;
-			font-size: 36rpx;
+		/* 调整序号列宽度 */
+		.uni-table-th,
+		.uni-table-td {
+			&:nth-child(1) {
+				width: 80rpx;
+				min-width: 80rpx;
+			}
+
+			&:nth-child(2) {
+				width: 60rpx;
+				min-width: 60rpx;
+			}
 		}
 	}
+
+
 
 
 	.form-actions {
