@@ -25,3 +25,12 @@ export function updateZbmain(data) {
     data: data
   })
 }
+
+// 新增主要焊缝施焊记录主表
+export function addZbmain(data) {
+  return request({
+    url: '/zbmain/zbmain',
+    method: 'post',
+    data: data
+  })
+}

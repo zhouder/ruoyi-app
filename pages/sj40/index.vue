@@ -5,6 +5,11 @@
 			<text class="title">SJ40信息管理</text>
 			<text class="subtitle">共 {{zbmainList.length}} 条记录</text>
 		</view>
+		
+		<button class="add-record-btn" @click="handleAdd()">
+			<uni-icons type="plusempty" size="10" color="#fff"></uni-icons>
+			添加记录 
+		</button>
 
 		<view class="list-wrapper">
 			<!-- 数据卡片 -->
@@ -13,7 +18,7 @@
 					<text class="card-title">记录 {{index + 1}}</text>
 					<!-- <text class="card-id">ID: {{item.bh || '--'}}</text> -->
 				</view>
-
+			
 				<view class="info-grid">
 					<view class="info-item">
 						<text class="label">施工单位</text>
@@ -43,6 +48,7 @@
 				<image src="/static/empty.png" class="empty-image"></image>
 				<text class="empty-text">暂无数据</text>
 			</view>
+			
 		</view>
 	</view>
 </template>
@@ -100,6 +106,11 @@
 			goToForm(id, sgdw) {
 				uni.navigateTo({
 					url: '/pages/sj40/sj40_form?id=' + id + '&sgdw=' + sgdw
+				})
+			},
+			handleAdd(){
+				uni.navigateTo({
+					url: '/pages/sj40/sj40_form'
 				})
 			}
 		}
@@ -229,4 +240,23 @@
 			padding: 24rpx;
 		}
 	}
+	
+	.add-record-btn {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background: linear-gradient(135deg, #27ae60, #2ecc71);
+			color: white;
+			height: 90rpx;
+			border-radius: 12rpx;
+			font-size: 32rpx;
+			font-weight: bold;
+			box-shadow: 0 6rpx 12rpx rgba(39, 174, 96, 0.3);
+			transition: all 0.3s ease;
+			
+			&:active {
+				transform: scale(0.98);
+				background: linear-gradient(135deg, #219653, #27ae60);
+			}
+		}
 </style>
