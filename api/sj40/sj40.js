@@ -34,3 +34,11 @@ export function addZbmain(data) {
     data: data
   })
 }
+
+// 删除主要焊缝施焊记录主表
+export function delZbmain(id) {
+  return request({
+    url: '/zbmain/zbmain/' + id,
+    method: 'delete'
+  })
+}

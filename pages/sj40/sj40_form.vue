@@ -76,7 +76,7 @@
 			<view class="uni-container">
 				<uni-table border stripe emptyText="暂无数据" class="editable-table">
 					<uni-tr>
-						<uni-th	 width="50" align="center">
+						<uni-th width="50" align="center">
 							<checkbox :checked="allSelected" @click="toggleAllSelection" />
 						</uni-th>
 						<uni-th width="60" align="center">序号</uni-th>
@@ -153,8 +153,10 @@
 		</view>
 
 		<view class="form-actions">
-			<button class="submit-btn" @click="submitForm">提交保存</button>
+			<button class="submit-btn" @click="submitForm">保存记录</button>
+			<button class="delete-btn" @click="deleteForm">删除记录</button>
 		</view>
+
 	</view>
 </template>
 
@@ -163,7 +165,8 @@
 		listZbmain,
 		getZbmain,
 		updateZbmain,
-		addZbmain
+		addZbmain,
+		delZbmain
 	} from '../../api/sj40/sj40.js'
 	export default {
 		data() {
@@ -291,6 +294,47 @@
 				}
 			},
 
+			// 删除表单
+			deleteForm() {
+				// 表单验证（可选保留，也可以移除）
+				if (!this.validateForm()) return;
+
+				if (this.form.id == null) {
+					uni.showToast({
+						title: '尚未保存，无法删除',
+						icon: 'none'
+					});
+					return;
+				}
+
+				// 二次确认
+				uni.showModal({
+					title: '确认删除',
+					content: '确定要删除这条记录吗？此操作不可恢复。',
+					success: (res) => {
+						if (res.confirm) {
+							delZbmain(this.form.id)
+								.then(response => {
+									uni.showToast({
+										title: '删除成功',
+										icon: 'success'
+									});
+									setTimeout(() => {
+										uni.navigateBack();
+									}, 1500);
+								})
+								.catch(error => {
+									console.error("删除失败:", error);
+									uni.showToast({
+										title: '删除失败',
+										icon: 'none'
+									});
+								});
+						}
+					}
+				});
+			},
+
 			// 表单验证
 			validateForm() {
 				if (!this.form.sgdw) {
@@ -372,22 +416,6 @@
 
 			// 删除选中行
 			removeSelectedRows() {
-				// if (this.selectedRows.length === 0) {
-				// 	uni.showToast({
-				// 		title: '请先选择要删除的行',
-				// 		icon: 'none'
-				// 	});
-				// 	return;
-				// }
-
-				// if (this.sj40DetailList.length - this.selectedRows.length < 1) {
-				// 	uni.showToast({
-				// 		title: '至少保留一条记录',
-				// 		icon: 'none'
-				// 	});
-				// 	return;
-				// }
-
 				uni.showModal({
 					title: '确认删除',
 					content: `确定要删除选中的 ${this.selectedRows.length} 条记录吗?`,
@@ -492,59 +520,60 @@
 
 
 	.editable-table {
-			width: 100%;
-			min-width: 1200rpx;
-	
-			.uni-table-th {
-				background-color: #f8f9fa;
-				font-weight: bold;
-				color: #2c3e50;
-			}
-	
-			// /* 添加复选框可见样式 */
-			// .checkbox {
-			// 	display: block;
-			// 	margin: 0 auto;
-			// 	width: 36rpx;
-			// 	height: 36rpx;
-			// 	opacity: 1;
-			// 	//appearance: checkbox; /* 标准属性 */
-			// }
-			
-			
-	
-			.table-input {
-				height: 70rpx;
-				padding: 0 10rpx;
-	
-				:deep(.uni-easyinput__content) {
-					min-height: auto;
-					border: 1rpx solid #dcdfe6;
-					border-radius: 8rpx;
-				}
-			}
-	
-			.table-datepicker {
-				:deep(.uni-date-editor) {
-					height: 70rpx;
-					border: 1rpx solid #dcdfe6;
-					border-radius: 8rpx;
-				}
-			}
-	
-			/* 调整序号列宽度 */
-			.uni-table-th,
-			.uni-table-td {
-				&:nth-child(1) {
-					width: 80rpx;
-					min-width: 80rpx;
-				}
-				&:nth-child(2) {
-					width: 60rpx;
-					min-width: 60rpx;
-				}
+		width: 100%;
+		min-width: 1200rpx;
+
+		.uni-table-th {
+			background-color: #f8f9fa;
+			font-weight: bold;
+			color: #2c3e50;
+		}
+
+		// /* 添加复选框可见样式 */
+		// .checkbox {
+		// 	display: block;
+		// 	margin: 0 auto;
+		// 	width: 36rpx;
+		// 	height: 36rpx;
+		// 	opacity: 1;
+		// 	//appearance: checkbox; /* 标准属性 */
+		// }
+
+
+
+		.table-input {
+			height: 70rpx;
+			padding: 0 10rpx;
+
+			:deep(.uni-easyinput__content) {
+				min-height: auto;
+				border: 1rpx solid #dcdfe6;
+				border-radius: 8rpx;
 			}
 		}
+
+		.table-datepicker {
+			:deep(.uni-date-editor) {
+				height: 70rpx;
+				border: 1rpx solid #dcdfe6;
+				border-radius: 8rpx;
+			}
+		}
+
+		/* 调整序号列宽度 */
+		.uni-table-th,
+		.uni-table-td {
+			&:nth-child(1) {
+				width: 80rpx;
+				min-width: 80rpx;
+			}
+
+			&:nth-child(2) {
+				width: 60rpx;
+				min-width: 60rpx;
+			}
+		}
+	}
 
 
 	/* 表格操作按钮 */
@@ -612,6 +641,18 @@
 
 		.submit-btn {
 			background: linear-gradient(135deg, #27ae60, #2ecc71);
+			color: white;
+			height: 90rpx;
+			border-radius: 12rpx;
+			font-size: 32rpx;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			box-shadow: 0 6rpx 12rpx rgba(39, 174, 96, 0.3);
+		}
+
+		.delete-btn {
+			background-color: #e74c3c;
 			color: white;
 			height: 90rpx;
 			border-radius: 12rpx;
