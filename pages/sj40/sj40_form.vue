@@ -67,6 +67,14 @@
 						<uni-datetime-picker type="date" v-model="form.cjsj"
 							placeholder="请输入创建时间"></uni-datetime-picker>
 					</uni-forms-item>
+					<uni-forms-item label="采集人员编号" name="userId" class="form-item">
+						<uni-easyinput type="text" v-model="form.userId" placeholder="自动填充采集人员编号"
+							:readonly="true"></uni-easyinput>
+					</uni-forms-item>
+
+					<uni-forms-item label="位置信息" name="position" class="form-item">
+						<uni-easyinput type="text" v-model="form.position" placeholder="自动填充位置"></uni-easyinput>
+					</uni-forms-item>
 				</view>
 			</view>
 		</view>
@@ -171,6 +179,9 @@
 	export default {
 		data() {
 			return {
+				longitude: "",
+				latitude: "",
+
 				title: '',
 				form: {
 					sgdw: '',
@@ -185,7 +196,10 @@
 					hjff: '',
 					jtxs: '',
 					hjwd: '',
-					xdsd: ''
+					xdsd: '',
+					userId: '',
+					position: '',
+
 				},
 				sj40DetailList: [],
 				selectedRows: [], // 存储选中的行索引
@@ -203,6 +217,7 @@
 			}
 		},
 		onLoad(options) {
+			// this.getPositionInfo();
 			if (options.id) {
 				this.loadList(options.id)
 			} else {
@@ -210,6 +225,7 @@
 				// this.addDetailRow();
 				this.reset();
 			}
+			this.getPositionInfo();
 		},
 		methods: {
 			loadList(id) {
@@ -224,6 +240,17 @@
 						icon: 'none'
 					})
 				});
+			},
+
+			getPositionInfo() {
+				uni.getLocation({
+					type: "wgs84",
+					success: (res) => {
+						console.log(res.longitude + ', ' + res.latitude)
+						this.longitude = res.longitude
+						this.latitude = res.latitude
+					}
+				})
 			},
 
 			// 添加明细行
@@ -257,7 +284,7 @@
 			submitForm() {
 				// 表单验证
 				if (!this.validateForm()) return;
-
+				this.form.position = this.longitude + ', ' + this.latitude
 				this.form.sj40DetailList = this.sj40DetailList;
 				if (this.form.id != null) {
 					updateZbmain(this.form).then(response => {
@@ -405,7 +432,9 @@
 					xdsd: null,
 					sgy: null,
 					zygcs: null,
-					cjsj: null
+					cjsj: null,
+					userId: null,
+					position: null,
 				};
 				this.sj40DetailList = [];
 

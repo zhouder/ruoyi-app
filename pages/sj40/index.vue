@@ -113,7 +113,9 @@
 					xdsd: null,
 					sgy: null,
 					zygcs: null,
-					cjsj: null
+					cjsj: null,
+					userid: null,
+					position: null,
 				},
 				// 添加初始查询参数用于重置
 				initialQueryParams: {
@@ -134,7 +136,9 @@
 					xdsd: null,
 					sgy: null,
 					zygcs: null,
-					cjsj: null
+					cjsj: null,
+					userid: null,
+					position: null,
 				}
 			}
 		},
