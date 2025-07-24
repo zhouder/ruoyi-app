@@ -297,7 +297,7 @@
 			// 删除表单
 			deleteForm() {
 				// 表单验证（可选保留，也可以移除）
-				if (!this.validateForm()) return;
+				//if (!this.validateForm()) return;
 
 				if (this.form.id == null) {
 					uni.showToast({
@@ -340,6 +340,27 @@
 				if (!this.form.sgdw) {
 					uni.showToast({
 						title: '请填写施工单位',
+						icon: 'none'
+					});
+					return false;
+				}
+				if (!this.form.jzdw) {
+					uni.showToast({
+						title: '请填写建造单位',
+						icon: 'none'
+					});
+					return false;
+				}
+				if (!this.form.jldw) {
+					uni.showToast({
+						title: '请填写监理单位',
+						icon: 'none'
+					});
+					return false;
+				}
+				if (!this.form.hth) {
+					uni.showToast({
+						title: '请填写合同号',
 						icon: 'none'
 					});
 					return false;
@@ -521,7 +542,7 @@
 
 	.editable-table {
 		width: 100%;
-		min-width: 1200rpx;
+		min-width: 600rpx;
 
 		.uni-table-th {
 			background-color: #f8f9fa;
